@@ -9,6 +9,7 @@ export let cart = [
   }
 ];
 
+
 export function addtoCart(productId)
 { 
   let matchingItem;
