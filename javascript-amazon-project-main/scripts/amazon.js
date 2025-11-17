@@ -61,12 +61,14 @@ products.forEach((product) => {
 });
 
 document.querySelector(".js-product-grid").innerHTML = productsHTML;
+updatecartQanity();
 
 document.querySelectorAll('.js-add-to-cart').forEach((button)=> {
   button.addEventListener('click',()=> {
     const productId = button.dataset.productId;
      
     addtoCart(productId);
+    updatecartQanity();
     addMessage(productId);
     updatecartQanity(); 
   } )
