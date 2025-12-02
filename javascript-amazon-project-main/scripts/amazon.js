@@ -1,9 +1,11 @@
 import {cart, addtoCart} from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
-import { loadproducts } from '../data/products.js';
+import { loadProductsfetch } from '../data/products.js';
 
-loadproducts(loadAmazongrid);
+loadProductsfetch().then(()=>{
+  loadAmazongrid();
+})
 function loadAmazongrid(){
     let productsHTML = '';
 
