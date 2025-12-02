@@ -3,9 +3,11 @@ import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 import { loadProductsfetch } from '../data/products.js';
 
-loadProductsfetch().then(()=>{
+async function loadpage(){
+  await loadProductsfetch();
   loadAmazongrid();
-})
+}
+loadpage();
 function loadAmazongrid(){
     let productsHTML = '';
 
