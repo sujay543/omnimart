@@ -3,13 +3,13 @@ import { getProduct } from "../data/products.js";
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { loadProductsfetch } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
-
+import { addtoCart } from "../data/cart.js";
 
 let orderpagehtml = '';
 
 function renderOrders(){
 orders.forEach((element)=> {
-  
+  if(element.products){
   let productshtml = '';
  element.products.forEach( (product)=>{
         const matchingproduct =  getProduct(product.productId);
@@ -30,20 +30,20 @@ orders.forEach((element)=> {
               <div class="product-quantity">
                 Quantity: ${product.quantity}
               </div>
-              <button class="buy-again-button button-primary">
+              <button class="buy-again-button button-primary js-button-primary"  data-product-id="${product.productId}">
                 <img class="buy-again-icon" src="images/icons/buy-again.png">
                 <span class="buy-again-message">Buy it again</span>
               </button>
             </div>
 
             <div class="product-actions">
-              <a href="tracking.html?date=${product.estimatedDeliveryTime}&name=${matchingproduct.name}&quantity=${product.quantity}&image=${matchingproduct.image}&upquantity=${orders.length}">
+              <a href="tracking.html?date=${product.estimatedDeliveryTime}&name=${matchingproduct.name}&quantity=${product.quantity}
+              &image=${matchingproduct.image}&upquantity=${orders.length}&ordertime=${element.orderTime}">
                 <button class="track-package-button button-secondary">
                   Track package
                 </button>
               </a>
             </div>`;
-            
 
  }) 
   const dateString = dayjs(element.orderTime).format('dddd D');
@@ -71,12 +71,26 @@ orders.forEach((element)=> {
             ${productshtml}
           </div>
         </div>`
+}
 })
+
   document.querySelector('.js-orders-grid').innerHTML = orderpagehtml;
   document.querySelector('.cart-quantity').innerHTML = orders.length;
+  buyAgain();
 }
 
 loadProductsfetch().then(() => {renderOrders()});
+
+function buyAgain(){
+document.querySelectorAll('.js-button-primary').forEach((button) => {
+  const productId = button.dataset.productId;
+  button.addEventListener('click',()=>{
+    addtoCart(productId);
+    window.location.href = 'checkout.html';
+  })
+})
+}
+
 
 // '[{"id":"b97d560a-89b1-48bd-9f09-bc8311264ace",
 // "orderTime":"2025-12-03T23:55:48.589Z",

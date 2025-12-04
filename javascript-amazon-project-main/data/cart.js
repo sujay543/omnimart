@@ -17,7 +17,7 @@ export function addtoCart(productId)
     });
    const quantitySelector = Number(document.querySelector(
         `.js-quantity-selector-${productId}`
-      ).value);
+      )?.value)|| 1;
     
 
     if(matchingItem){

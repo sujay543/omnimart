@@ -10,8 +10,19 @@ async function loadpage(){
 loadpage();
 function loadAmazongrid(){
     let productsHTML = '';
-
-    products.forEach((product) => {
+    const url = new URL(window.location.href);
+      const searchtext = url.searchParams.get('search');
+      document.querySelector('.search-bar').value = searchtext || "";
+      let filteredProducts = products;
+      if(searchtext){  
+        const lowerSearch = searchtext.toLowerCase();
+        filteredProducts = products.filter((product) => {
+        return product.name.toLowerCase().includes(lowerSearch);
+      });
+      }
+      
+    filteredProducts.forEach((product) => {
+      
       productsHTML += `
       <div class="product-container">
               <div class="product-image-container">
@@ -111,5 +122,27 @@ function loadAmazongrid(){
         }
       })
     }
+    function performSearch() {
+      const searchText = document.querySelector('.search-bar').value;
+      if (searchText) {
+        window.location.href = `amazon.html?search=${searchText}`;
+      }
+    }
+   document.querySelector('.js-search-button')
+  .addEventListener('click', performSearch);
+  
+   document.addEventListener('keydown', function(event) {
+     if (event.key === 'Enter') {
+      performSearch();
+    }
+   });
 
+   document.querySelector('.search-bar')
+  .addEventListener('input', function () {
+    if (this.value.trim() === "") {
+      window.location.href = "amazon.html"; // reload page without search
+    }
+  });
+    
+  
 }
