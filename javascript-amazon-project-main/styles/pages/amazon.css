@@ -159,3 +159,17 @@
 .active{
   opacity: 1;
 }
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;  /* full page center */
+}
+
+.spinner-border {
+  color: #ff9900;
+  width: 4rem;       /* increase size */
+  height: 4rem;
+  border-width: 0.5rem; /* thicker border */
+}
