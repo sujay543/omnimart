@@ -1,6 +1,5 @@
-export function getProduct(productId){
+export  function getProduct(productId){
   let matchingProduct;
-
   products.forEach((product) => {
     if(product.id == productId){
       matchingProduct = product;
@@ -29,7 +28,6 @@ export function loadProductsfetch(){
   const promise = fetch("https://supersimplebackend.dev/products").then((response)=> {
     return response.json();
   }).then((productsData)=>{
-    console.log(productsData)
     products = productsData;
   })
   return promise;
