@@ -127,7 +127,7 @@ function loadAmazongrid(){
     function performSearch() {
       const searchText = document.querySelector('.search-bar').value;
       if (searchText) {
-        window.location.href = `amazon.html?search=${searchText}`;
+        window.location.href = `index.html?search=${searchText}`;
       }
     }
    document.querySelector('.js-search-button')
@@ -142,7 +142,7 @@ function loadAmazongrid(){
    document.querySelector('.search-bar')
   .addEventListener('input', function () {
     if (this.value.trim() === "") {
-      window.location.href = "amazon.html"; // reload page without search
+      window.location.href = "index.html"; // reload page without search
     }
   });
     
