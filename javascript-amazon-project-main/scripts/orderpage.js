@@ -4,6 +4,7 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { loadProductsfetch } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 import { addtoCart } from "../data/cart.js";
+import { cart } from "../data/cart.js";
 
 let orderpagehtml = '';
 
@@ -75,7 +76,7 @@ orders.forEach((element)=> {
 })
 
   document.querySelector('.js-orders-grid').innerHTML = orderpagehtml;
-  document.querySelector('.cart-quantity').innerHTML = orders.length;
+  document.querySelector('.cart-quantity').innerHTML = cart.length;
   buyAgain();
 }
 
